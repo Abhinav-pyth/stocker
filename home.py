@@ -65,8 +65,8 @@ st.write("This app predicts stock prices using a simple Linear Regression model.
 
 # User inputs
 stock_ticker = st.text_input("Enter Stock Ticker (e.g., RELIANCE.NS):", "RELIANCE.NS")
-start_date = st.date_input("Start Date", value=date(2015, 1, 1))
-end_date = st.date_input("End Date", value=date(2024, 12, 13))
+start_date = st.date_input("Start Date", value=date(2022, 1, 1))
+end_date = st.date_input("End Date", value=date(2024, 12, 19))
 
 # Fetch and display stock data
 if st.button("Fetch and Predict"):
@@ -78,16 +78,16 @@ if st.button("Fetch and Predict"):
         st.dataframe(stock_data.tail())
         
         # Plot stock prices
-        st.write("Closing Price Trend:")
-        st.line_chart(stock_data['Close'])
+        #st.write("Closing Price Trend:")
+        #st.line_chart(stock_data['Close'])
         
         # Moving Averages
-        st.write("Moving Averages (20 and 50 days):")
-        stock_data['MA20'] = stock_data['Close'].rolling(window=20).mean()
+        st.write("Moving Averages (200 and 50 days):")
+        stock_data['MA200'] = stock_data['Close'].rolling(window=200).mean()
         stock_data['MA50'] = stock_data['Close'].rolling(window=50).mean()
         plt.figure(figsize=(10, 6))
         plt.plot(stock_data['Close'], label="Close Price", color="blue")
-        plt.plot(stock_data['MA20'], label="20-Day MA", color="orange")
+        plt.plot(stock_data['MA200'], label="200-Day MA", color="orange")
         plt.plot(stock_data['MA50'], label="50-Day MA", color="green")
         plt.title(f"{stock_ticker} Price and Moving Averages")
         plt.legend()
